@@ -28,7 +28,7 @@ class BlogsController < ApplicationController
     @blog = current_user.blogs.build(blog_params)
     respond_to do |format|
       if @blog.save
-        format.html { redirect_to @blog, notice: "Blog was successfully created." }
+        format.html { redirect_to @blog, notice: "投稿しました。" }
         format.json { render :show, status: :created, location: @blog }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        format.html { redirect_to @blog, notice: "Blog was successfully updated." }
+        format.html { redirect_to @blog, notice: "更新しました。" }
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +52,19 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: "Blog was successfully destroyed." }
+      format.html { redirect_to blogs_url, notice: "投稿を削除しました。" }
       format.json { head :no_content }
     end
   end
 
   private
 
-    def set_blog
+  def set_blog
       @blog = Blog.find(params[:id])
-    end
+  end
 
-    def blog_params
+  def blog_params
       params.require(:blog).permit(:content, :image, :image_cache, :user_id)
-    end
+  end
 
 end
