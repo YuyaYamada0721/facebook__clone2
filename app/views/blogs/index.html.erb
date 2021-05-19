@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Blogs</h1>
+<h1>投稿一覧</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Content</th>
-      <th>Image</th>
-      <th>User</th>
+      <th>内容</th>
+      <th>ユーザー名</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,11 +15,10 @@
     <% @blogs.each do |blog| %>
       <tr>
         <td><%= blog.content %></td>
-        <td><%= blog.image %></td>
-        <td><%= blog.user %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= blog.user.name %></td>
+        <td><%= link_to '詳細', blog %></td>
+        <td><%= link_to '編集', edit_blog_path(blog) %></td>
+        <td><%= link_to '削除', blog, method: :delete, data: { confirm: '削除していいですか?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Blog', new_blog_path %>
+<%= link_to '投稿する', new_blog_path %>
