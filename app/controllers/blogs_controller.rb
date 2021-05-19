@@ -5,9 +5,7 @@ class BlogsController < ApplicationController
     @blogs = Blog.all
   end
 
-  def show
-    
-  end
+  def show; end
 
   def new
     @blog = if params[:back]
@@ -26,14 +24,12 @@ class BlogsController < ApplicationController
 
   def create
     @blog = current_user.blogs.build(blog_params)
-    respond_to do |format|
-      if @blog.save
-        format.html { redirect_to @blog, notice: '投稿しました。' }
-        format.json { render :show, status: :created, location: @blog }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
-      end
+    if params[:back]
+      render :new
+    elsif @blog.save
+      redirect_to blogs_path, notice: '投稿しました。'
+    else
+      render :new
     end
   end
 
